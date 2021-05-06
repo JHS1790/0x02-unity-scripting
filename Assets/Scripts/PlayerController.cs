@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     ///<summary>Player Speed</velocity>
     public float playerSpeed = 10.0f;
+    ///Score
+    private int score = 0;
 
     ///Start
     private void Start()
@@ -29,5 +31,12 @@ public class PlayerController : MonoBehaviour
         }
 
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+
+    ///Triggered
+    void OnTriggerEnter(Collider other)
+    {
+        this.score += 1;
+        Debug.Log($"Score: {this.score}");
     }
 }
