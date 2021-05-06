@@ -6,11 +6,11 @@ public class CameraController : MonoBehaviour
 {
     ///<summary>Player</summary>
     public Transform player;
-
+    ///<summary>Camera Speed</summary>
     public float smoothSpeed = 0.025f;
-
+    ///<summary>Camera Offset</summary>
     public Vector3 offset;
-
+    ///do tha move
     void FixedUpdate()
     {
         Vector3 desiredPosition = player.position + offset;
