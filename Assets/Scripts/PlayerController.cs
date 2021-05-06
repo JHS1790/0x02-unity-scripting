@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
     public float playerSpeed = 10.0f;
     ///Score
     private int score = 0;
+    ///<summary>Player Health</velocity>
+    public int health = 5;
 
     ///Start
     private void Start()
@@ -31,12 +34,29 @@ public class PlayerController : MonoBehaviour
         }
 
         controller.Move(playerVelocity * Time.deltaTime);
+
+        if (this.health <= 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     ///Triggered
     void OnTriggerEnter(Collider other)
     {
-        this.score += 1;
-        Debug.Log($"Score: {this.score}");
+        if(other.gameObject.tag == "Trap")
+        {
+            this.health -= 1;
+            Debug.Log($"Health: {this.health}");
+        }
+        if(other.gameObject.tag == "Pickup")
+        {
+            this.score += 1;
+            Debug.Log($"Score: {this.score}");
+        }
+        if(other.gameObject.tag == "Goal")
+        {
+            Debug.Log($"You win!");
+        }
     }
 }
